@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../assets/Style/Signup-Style.css";
+import { fetchInstance } from "../libs/fetch";
 import {
   MDBBtn,
   MDBContainer,
@@ -35,7 +36,7 @@ export default function Signup() {
           return;
         }
 
-        const response = await fetch("/api/signup-user", {
+        const response = await fetchInstance("/signup-user", {
           method: "POST",
           body: JSON.stringify({
             firstName,
@@ -47,12 +48,9 @@ export default function Signup() {
           headers: { "Content-Type": "application/json" },
         });
 
-        if (response.ok) {
-          const result = await response.json();
-          sessionStorage.setItem(
-            "signup-user",
-            JSON.stringify(result.result.email)
-          );
+        if (response) {
+          let result = response.result;
+          sessionStorage.setItem("signup-user", JSON.stringify(result.email));
           toast.info(<div>Please Check your Email !!</div>, {
             theme: "colored",
           });
