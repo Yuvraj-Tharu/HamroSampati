@@ -49,7 +49,7 @@ app.use("/", MessageRouter);
 
 app.use("/", MsgRoutes);
 app.use("/", auctionRoutes);
-app.use("/api", "https://hamrosampati.onrender.com");
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/dist")));
 

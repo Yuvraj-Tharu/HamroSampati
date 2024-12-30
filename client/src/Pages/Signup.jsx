@@ -36,17 +36,20 @@ export default function Signup() {
           return;
         }
 
-        const response = await fetchInstance("/signup-user", {
-          method: "POST",
-          body: JSON.stringify({
-            firstName,
-            lastName,
-            email,
-            password,
-            confirmPassword,
-          }),
-          headers: { "Content-Type": "application/json" },
-        });
+        const response = await fetch(
+          "https://hamrosampati.onrender.com/sign-up/api/signup-user",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              firstName,
+              lastName,
+              email,
+              password,
+              confirmPassword,
+            }),
+            headers: { "Content-Type": "application/json" },
+          }
+        );
 
         if (response) {
           let result = response.result;
