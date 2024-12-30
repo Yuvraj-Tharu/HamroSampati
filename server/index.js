@@ -19,7 +19,12 @@ const AdminRouter = require("./Routes/Admin.Routes");
 const MsgRoutes = require("./Routes/Msg.Routes");
 const auctionRoutes = require("./Routes/Auction.Routes");
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://localhost:5174"],
+    credentials: true,
+  })
+);
 const path = require("path");
 const { log } = require("console");
 
@@ -44,7 +49,7 @@ app.use("/", MessageRouter);
 
 app.use("/", MsgRoutes);
 app.use("/", auctionRoutes);
-
+app.use("/api", "https://hamrosampati.onrender.com");
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/dist")));
 

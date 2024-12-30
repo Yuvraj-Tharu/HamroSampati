@@ -50,13 +50,14 @@ export default function Signup() {
 
         if (response) {
           let result = response.result;
+
           sessionStorage.setItem("signup-user", JSON.stringify(result.email));
           toast.info(<div>Please Check your Email !!</div>, {
             theme: "colored",
           });
           navigate("/verify/otp");
         } else {
-          const result = await response.json();
+          const result = response.result;
 
           if (result.error && result.error.includes("duplicate key error")) {
             setError("User with this email already exists");
